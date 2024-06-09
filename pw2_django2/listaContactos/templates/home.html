@@ -6,10 +6,19 @@
     <title>Template Base</title>
 </head>
 <body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    {% include 'nav.html' %}
+    {% include 'bloque2.html' %}
+
     <h1>Hola mundo desde Django</h1>
     <h2>Con templates</h2>
+    
     {{request.user}}
     <br>
     {{request.user.is_authenticated}}
+    {% endblock %}
+    
 </body>
 </html>
