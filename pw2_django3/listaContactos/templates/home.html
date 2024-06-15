@@ -19,8 +19,14 @@
     
     {{request.user}}
     <br>
+    <p>
+        {{ myText }},
+        {{ myNumber }}
+    </p>
+
     {{request.user.is_authenticated}}
     {% endblock %}
+    
     
 </body>
 </html>
