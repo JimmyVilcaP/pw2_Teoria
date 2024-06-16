@@ -9,20 +9,24 @@
     {% extends 'base.html' %}
 
     {% block content %}
-
-    {% include 'nav.html' %}
-
-    {% include 'bloque2.html' %}
-
     <h1>Hola mundo desde Django</h1>
     <h2>Con templates</h2>
-    
-    {{request.user}}
     <br>
     <p>
         {{ myText }},
         {{ myNumber }}
     </p>
+    <ul>
+        {% for myItem in myList %}
+            <li>{{forloop.counter}} - {{myItem}}
+            {% if myItem == 33%}
+                - Este número es mágico
+            {% elif myItem > 50 %}
+                - Este número es mayor que 50
+            {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 
     {{request.user.is_authenticated}}
     {% endblock %}
