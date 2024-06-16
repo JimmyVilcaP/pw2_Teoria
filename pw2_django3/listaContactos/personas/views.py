@@ -13,10 +13,10 @@ def personaTestView(request):
 def personaCreativeView(request):
     form = PersonaForm(request.POST or None)
     if(form.is_valid()):
-        form.save
+        form.save()
         form = PersonaForm()
 
     context = {
-        'form': form,
+        'form': form
     }
     return render(request, 'personas/personasCreate.html', context)
