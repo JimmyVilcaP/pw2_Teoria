@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Persona
 from .forms import PersonaForm, RawPersonaForm
 
@@ -11,11 +11,17 @@ def personaTestView(request):
     return render(request, 'personas/descripcion.html', context)
 
 def personaCreativeView(request):
-    print(request)
-    if request.method == 'POST':
-        nombre=request.POST.get('q')
-        print(nombre)
-    context = {}
+    initialValues = {
+        'nombres': 'Sin nombre'
+    }
+    form = PersonaForm(request.POST or None, initial=initialValues)
+    if form.is_valid():
+        form.save()
+        form = PersonaForm()
+
+    context = {
+        'form': form
+    }
     return render(request, 'personas/personasCreate.html', context)
 
 def personasAnotherCreateView(request):
@@ -31,3 +37,10 @@ def personasAnotherCreateView(request):
         'form': form,
         }
     return render(request, 'personas/personasCreate.html', context)
+
+def personasShowObject(request, myID):
+    obj= get_object_or_404(Persona, id=myID)
+    context = {
+        'objeto': obj,
+    }
+    return render(request, 'personas/descripcion.html', context)
