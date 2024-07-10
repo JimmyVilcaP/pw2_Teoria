@@ -40,4 +40,7 @@ export class AppComponent {
   toggleHobbies() {
     this.showHobbies = !this.showHobbies;
   }
+  sayHello() {
+    alert("Hola desde app.component");
+  }
 }
