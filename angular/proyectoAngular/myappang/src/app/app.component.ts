@@ -50,4 +50,10 @@ export class AppComponent {
       }
     }
   }
+  addUser(newUser: HTMLInputElement) {
+    this.users.push(newUser.value);
+    newUser.value = '';
+    newUser.focus();
+    return false;
+  }
 }
