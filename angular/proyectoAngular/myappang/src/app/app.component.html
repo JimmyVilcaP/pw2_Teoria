@@ -7,7 +7,8 @@
   <h2>{{ name }}</h2>
   <h2>{{ email }}</h2>
 
-  <div *ngIf="showhobbies()" class="component2">
+  <button (click)="toggleHobbies()" class="btn">Mostrar Hobbies</button>
+  <div *ngIf="showHobbies" class="component2">
     <h3>hobbies:</h3>
     <ul>
       <li *ngFor="let hobby of hobbies">{{ hobby }}</li>
@@ -18,3 +19,7 @@
 <div class="black">
   <h1>{{ title }}</h1>
 </div>
+<h2>Añade hobby:</h2>
+<form (submit)="newHobby(hobby)">
+  <input #hobby type="text" placeholder="hobby">
+</form>
