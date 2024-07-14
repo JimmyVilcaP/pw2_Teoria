@@ -1,1 +1,10 @@
-<p>crear-tarea works!</p>
+<h2>Crear Nueva Tarea (Directo al DOM)</h2>
+<form (submit)="crearTarea()">
+  <label for="titulo">Título:</label>
+  <input type="text" id="titulo" #tituloInput required>
+  <br>
+  <label for="descripcion">Descripción:</label>
+  <textarea id="descripcion" #descripcionTextarea></textarea>
+  <br>
+  <button type="submit">Crear Tarea</button>
+</form>
