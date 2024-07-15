@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface Tarea {
@@ -13,24 +13,23 @@ interface Tarea {
   providedIn: 'root'
 })
 export class TareaService {
-  private baseUrl = 'http://127.0.0.1:8000/api/tareas/';
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private apiUrl = 'http://127.0.0.1:8000/api/tareas/';
 
   constructor(private http: HttpClient) { }
 
   getTareas(): Observable<Tarea[]> {
-    return this.http.get<Tarea[]>(this.baseUrl, { headers: this.httpHeaders });
+    return this.http.get<Tarea[]>(this.apiUrl);
   }
 
   createTarea(tarea: Tarea): Observable<Tarea> {
-    return this.http.post<Tarea>(this.baseUrl, tarea, { headers: this.httpHeaders });
+    return this.http.post<Tarea>(this.apiUrl, tarea);
   }
 
   updateTarea(tarea: Tarea): Observable<Tarea> {
-    return this.http.put<Tarea>(`${this.baseUrl}${tarea.id}/`, tarea, { headers: this.httpHeaders });
+    return this.http.put<Tarea>(`${this.apiUrl}${tarea.id}/`, tarea);
   }
 
   deleteTarea(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}${id}/`, { headers: this.httpHeaders });
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
   }
 }

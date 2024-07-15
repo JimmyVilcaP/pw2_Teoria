@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { TareaService } from '../tarea.service';
 
 @Component({
   selector: 'app-crear-tarea',
@@ -14,7 +15,7 @@ export class CrearTareaComponent {
   descripcion: string = '';
   completada: boolean = false;
 
-  constructor() {}
+  constructor(private tareaService: TareaService) {}
 
   crearTarea(): void {
     const titulo = this.tituloInput.nativeElement.value;
@@ -27,5 +28,12 @@ export class CrearTareaComponent {
     this.titulo = titulo;
     this.descripcion = descripcion;
     this.completada = false;
+
+    this.tareaService.createTarea({
+      id: this.id,
+      titulo: this.titulo,
+      descripcion: this.descripcion,
+      completada: this.completada
+    }).subscribe();
   }
 }
