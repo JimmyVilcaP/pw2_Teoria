@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { AxiosService } from './axios.service';
+import { Observable, from } from 'rxjs';
 
 interface Tarea {
   id: number;
@@ -13,23 +13,23 @@ interface Tarea {
   providedIn: 'root'
 })
 export class TareaService {
-  private apiUrl = 'http://127.0.0.1:8000/api/tareas/';
+  private baseUrl = 'http://127.0.0.1:8000/api/tareas/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private axiosService: AxiosService) { }
 
   getTareas(): Observable<Tarea[]> {
-    return this.http.get<Tarea[]>(this.apiUrl);
+    return from(this.axiosService.get(this.baseUrl).then(response => response.data));
   }
 
   createTarea(tarea: Tarea): Observable<Tarea> {
-    return this.http.post<Tarea>(this.apiUrl, tarea);
+    return from(this.axiosService.post(this.baseUrl, tarea).then(response => response.data));
   }
 
   updateTarea(tarea: Tarea): Observable<Tarea> {
-    return this.http.put<Tarea>(`${this.apiUrl}${tarea.id}/`, tarea);
+    return from(this.axiosService.put(`${this.baseUrl}${tarea.id}/`, tarea).then(response => response.data));
   }
 
   deleteTarea(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}${id}/`);
+    return from(this.axiosService.delete(`${this.baseUrl}${id}/`).then(response => response.data));
   }
 }

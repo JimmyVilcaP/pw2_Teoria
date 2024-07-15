@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
@@ -16,7 +16,7 @@ import { TareaService } from './tarea.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    CommonModule
   ],
   providers: [
     TareaService
